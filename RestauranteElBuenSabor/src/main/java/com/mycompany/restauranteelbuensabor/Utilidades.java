@@ -21,7 +21,6 @@ public class Utilidades {
         }
         if (contador == 0) {
             DatosRestaurante.totalFactura = 0;
-            DatosRestaurante.mensajeTemporal = "";
         }
         return contador > 0;
     }
@@ -35,6 +34,5 @@ public class Utilidades {
         DatosRestaurante.totalFactura = 0;
         DatosRestaurante.estadoMesa = 0;
         DatosRestaurante.numeroMesaActual = 0;
-        DatosRestaurante.mensajeTemporal = "";
     }
 }
