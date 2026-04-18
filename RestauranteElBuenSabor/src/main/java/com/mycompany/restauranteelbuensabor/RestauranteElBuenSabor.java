@@ -36,7 +36,7 @@ public class RestauranteElBuenSabor {
             System.out.print("Seleccione una opcion: ");
             op = sc.nextInt();
             if (op == 1) {
-                Imprimir.mostrarCarta();
+                ImprimirFactura.mostrarCarta();
                 System.out.println();
             } 
             else if (op == 2) {
@@ -90,7 +90,7 @@ public class RestauranteElBuenSabor {
             else if (op == 3) {
                 System.out.println();
                 if (Utilidades.validar()) {
-                    Imprimir.mostrarPedido();
+                    ImprimirFactura.mostrarPedido();
                 } else {
                     System.out.println("No hay productos en el pedido actual.");
                     System.out.println("Use la opcion 2 para agregar productos.");
@@ -102,11 +102,11 @@ public class RestauranteElBuenSabor {
                 System.out.println();
                 if (Utilidades.validar()) {
                     double r = 0;
-                    r = Proceso.hacerTodo();
+                    r = CalcularFactura.calcularTotalFactura();
                     tmp = (int) r;
                     aux = "Total calculado: $" + tmp;
                     m = r;
-                    Imprimir.imprimirFacturaCompleta();
+                    ImprimirFactura.imprimirFacturaCompleta();
                     System.out.println();
                 } 
                 else {

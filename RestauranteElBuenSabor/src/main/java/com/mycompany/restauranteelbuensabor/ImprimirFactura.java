@@ -8,7 +8,7 @@ package com.mycompany.restauranteelbuensabor;
  *
  * @author alfre
  */
-public class Imprimir {
+public class ImprimirFactura {
 
     public static void mostrarCarta() {
         System.out.println("========================================");
