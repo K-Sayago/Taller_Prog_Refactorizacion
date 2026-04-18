@@ -17,9 +17,9 @@ public class CalcularFactura {
         double subtotalConDescuento = 0;
         int itemsDiferentes = 0;
         int indice = 0;
-        while (indice < Datos.nombres.length) {
-            if (Datos.cantidades[indice] > 0) {
-                subtotal = subtotal + Datos.precios[indice] * Datos.cantidades[indice];
+        while (indice < DatosRestaurante.nombres.length) {
+            if (DatosRestaurante.cantidades[indice] > 0) {
+                subtotal = subtotal + DatosRestaurante.precios[indice] * DatosRestaurante.cantidades[indice];
                 itemsDiferentes = itemsDiferentes + 1;
             }
             indice++;
@@ -49,8 +49,8 @@ public class CalcularFactura {
                 total = subtotal + iva;
             }
         }
-        Datos.estadoMesa = 1;
-        Datos.totalFactura = total;
+        DatosRestaurante.estadoMesa = 1;
+        DatosRestaurante.totalFactura = total;
         return total;
     }
 }

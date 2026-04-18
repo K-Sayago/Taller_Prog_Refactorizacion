@@ -8,7 +8,7 @@ package com.mycompany.restauranteelbuensabor;
  *
  * @author alfre
  */
-public class Datos {
+public class DatosRestaurante {
 
     public static String[] nombres = {"Bandeja Paisa", "Sancocho de Gallina", "Arepa con Huevo", "Jugo Natural", "Gaseosa", "Cerveza Poker", "Agua Panela", "Arroz con Pollo"};
     public static double[] precios = {32000, 28000, 8000, 7000, 4500, 6000, 3500, 25000};

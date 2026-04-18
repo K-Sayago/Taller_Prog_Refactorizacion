@@ -16,8 +16,8 @@ public class ImprimirFactura {
         System.out.println("    --- NUESTRA CARTA ---");
         System.out.println("========================================");
         int indice = 0;
-        while (indice < Datos.nombres.length) {
-            System.out.printf("%d. %-22s $%,.0f%n", (indice + 1), Datos.nombres[indice], Datos.precios[indice]);
+        while (indice < DatosRestaurante.nombres.length) {
+            System.out.printf("%d. %-22s $%,.0f%n", (indice + 1), DatosRestaurante.nombres[indice], DatosRestaurante.precios[indice]);
             indice++;
         }
         System.out.println("========================================");
@@ -27,10 +27,10 @@ public class ImprimirFactura {
         double subtotal = 0;
         int indice = 0;
         System.out.println("--- PEDIDO ACTUAL ---");
-        while (indice < Datos.nombres.length) {
-            if (Datos.cantidades[indice] > 0) {
-                System.out.printf("%-20s x%-6d $%,.0f%n", Datos.nombres[indice], Datos.cantidades[indice], (Datos.precios[indice] * Datos.cantidades[indice]));
-                subtotal = subtotal + Datos.precios[indice] * Datos.cantidades[indice];
+        while (indice < DatosRestaurante.nombres.length) {
+            if (DatosRestaurante.cantidades[indice] > 0) {
+                System.out.printf("%-20s x%-6d $%,.0f%n", DatosRestaurante.nombres[indice], DatosRestaurante.cantidades[indice], (DatosRestaurante.precios[indice] * DatosRestaurante.cantidades[indice]));
+                subtotal = subtotal + DatosRestaurante.precios[indice] * DatosRestaurante.cantidades[indice];
             }
             indice++;
         }
@@ -46,9 +46,9 @@ public class ImprimirFactura {
         int itemsDiferentes = 0;
         double subtotalConDescuento = 0;
         int indice = 0;
-        while (indice < Datos.nombres.length) {
-            if (Datos.cantidades[indice] > 0) {
-                subtotal = subtotal + Datos.precios[indice] * Datos.cantidades[indice];
+        while (indice < DatosRestaurante.nombres.length) {
+            if (DatosRestaurante.cantidades[indice] > 0) {
+                subtotal = subtotal + DatosRestaurante.precios[indice] * DatosRestaurante.cantidades[indice];
                 itemsDiferentes = itemsDiferentes + 1;
             }
             indice++;
@@ -76,12 +76,12 @@ public class ImprimirFactura {
         System.out.println("    Calle 15 #8-32, Valledupar");
         System.out.println("    NIT: 900.123.456-7");
         System.out.println(separador);
-        System.out.printf("FACTURA No. %03d%n", Datos.numeroFactura);
+        System.out.printf("FACTURA No. %03d%n", DatosRestaurante.numeroFactura);
         System.out.println("----------------------------------------");
         int j = 0;
-        while (j < Datos.nombres.length) {
-            if (Datos.cantidades[j] > 0) {
-                System.out.printf("%-20s x%-6d $%,.0f%n", Datos.nombres[j], Datos.cantidades[j], (Datos.precios[j] * Datos.cantidades[j]));
+        while (j < DatosRestaurante.nombres.length) {
+            if (DatosRestaurante.cantidades[j] > 0) {
+                System.out.printf("%-20s x%-6d $%,.0f%n", DatosRestaurante.nombres[j], DatosRestaurante.cantidades[j], (DatosRestaurante.precios[j] * DatosRestaurante.cantidades[j]));
             }
             j++;
         }
@@ -97,9 +97,9 @@ public class ImprimirFactura {
         System.out.println("Gracias por su visita!");
         System.out.println("El Buen Sabor - Valledupar");
         System.out.println(separador);
-        Datos.numeroFactura = Datos.numeroFactura + 1;
-        Datos.estadoMesa = 0;
-        Datos.totalFactura = total;
+        DatosRestaurante.numeroFactura = DatosRestaurante.numeroFactura + 1;
+        DatosRestaurante.estadoMesa = 0;
+        DatosRestaurante.totalFactura = total;
     }
 
     public static void imprimirFacturaResumen() {
@@ -110,9 +110,9 @@ public class ImprimirFactura {
         int itemsDiferentes = 0;
         double subtotalConDescuento = 0;
         int indice = 0;
-        while (indice < Datos.nombres.length) {
-            if (Datos.cantidades[indice] > 0) {
-                subtotal = subtotal + Datos.precios[indice] * Datos.cantidades[indice];
+        while (indice < DatosRestaurante.nombres.length) {
+            if (DatosRestaurante.cantidades[indice] > 0) {
+                subtotal = subtotal + DatosRestaurante.precios[indice] * DatosRestaurante.cantidades[indice];
                 itemsDiferentes = itemsDiferentes + 1;
             }
             indice++;
@@ -139,7 +139,7 @@ public class ImprimirFactura {
         System.out.println("    Calle 15 #8-32, Valledupar");
         System.out.println("    NIT: 900.123.456-7");
         System.out.println(separador);
-        System.out.printf("FACTURA No. %03d (RESUMEN)%n", Datos.numeroFactura);
+        System.out.printf("FACTURA No. %03d (RESUMEN)%n", DatosRestaurante.numeroFactura);
         System.out.println("----------------------------------------");
         System.out.printf("%-27s $%,.0f%n", "Subtotal:", subtotalConDescuento);
         System.out.printf("%-27s $%,.0f%n", "IVA (19%):", iva);
