@@ -11,13 +11,14 @@ import java.util.Scanner;
  */
 public class RestauranteElBuenSabor {
 
+   private static int numeroFacturaActual = 1;
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        Mesa mesa = new Mesa();
         int opcionMenu = 0;
         boolean ejecutando = true;
         int intentosInvalidos = 0;
-        int numeroMesa = 0;
-        double montoProducto = 0;
 
         ImprimirFactura.imprimirEncabezado();
         while (ejecutando) {
@@ -35,28 +36,25 @@ public class RestauranteElBuenSabor {
                 System.out.println();
             } else if (opcionMenu == 2) {
                 System.out.println("--- AGREGAR PRODUCTO ---");
-                System.out.print("Numero de producto (1-" + DatosRestaurante.nombres.length + "): ");
+                System.out.print("Numero de producto (1-" + Carta.cantidadProductos() + "): ");
                 int numeroProducto = sc.nextInt();
                 System.out.print("Cantidad: ");
                 int cantidad = sc.nextInt();
-                if (numeroProducto > 0 && numeroProducto <= DatosRestaurante.nombres.length) {
+                if (numeroProducto > 0 && numeroProducto <= Carta.cantidadProductos()) {
                     if (cantidad > 0) {
-                        if (DatosRestaurante.estadoMesa == 0) {
+                        if (!mesa.estaActiva()) {
                             System.out.print("Ingrese numero de mesa: ");
-                            DatosRestaurante.numeroMesaActual = sc.nextInt();
-                            if (DatosRestaurante.numeroMesaActual > 0) {
-                                DatosRestaurante.estadoMesa = 1;
-                                numeroMesa = DatosRestaurante.numeroMesaActual;
+                            int numeroMesa = sc.nextInt();
+                            if (numeroMesa > 0) {
+                                mesa.activar(numeroMesa);
                             } else {
-                                DatosRestaurante.numeroMesaActual = 1;
-                                DatosRestaurante.estadoMesa = 1;
-                                numeroMesa = 1;
+                                mesa.activar(1);
                             }
                         }
-                        DatosRestaurante.cantidades[numeroProducto - 1] = DatosRestaurante.cantidades[numeroProducto - 1] + cantidad;
+                        Producto producto = Carta.getProductos()[numeroProducto - 1];
+                        mesa.getPedido().agregarItem(producto, cantidad);
                         System.out.println("Producto agregado al pedido.");
-                        System.out.println("  -> " + DatosRestaurante.nombres[numeroProducto - 1] + " x" + cantidad);
-                        montoProducto = DatosRestaurante.precios[numeroProducto - 1] * cantidad;
+                        System.out.println("  -> " + producto.getNombre() + " x" + cantidad);
                     } else {
                         if (cantidad == 0) {
                             System.out.println("La cantidad no puede ser cero.");
@@ -68,14 +66,14 @@ public class RestauranteElBuenSabor {
                     if (numeroProducto <= 0) {
                         System.out.println("El numero debe ser mayor a cero.");
                     } else {
-                        System.out.println("Producto no existe. La carta tiene " + DatosRestaurante.nombres.length + " productos.");
+                        System.out.println("Producto no existe. La carta tiene " + Carta.cantidadProductos() + " productos.");
                     }
                 }
                 System.out.println();
             } else if (opcionMenu == 3) {
                 System.out.println();
-                if (Utilidades.hayProductosEnPedido()) {
-                    ImprimirFactura.mostrarPedido();
+                if (mesa.getPedido().tieneProductos()) {
+                    ImprimirFactura.mostrarPedido(mesa.getPedido());
                 } else {
                     System.out.println("No hay productos en el pedido actual.");
                     System.out.println("Use la opcion 2 para agregar productos.");
@@ -83,10 +81,10 @@ public class RestauranteElBuenSabor {
                 System.out.println();
             } else if (opcionMenu == 4) {
                 System.out.println();
-                if (Utilidades.hayProductosEnPedido()) {
-                    double totalCalculado = CalcularFactura.calcularTotal();
-                    montoProducto = totalCalculado;
-                    ImprimirFactura.imprimirFacturaCompleta();
+                if (mesa.getPedido().tieneProductos()) {
+                    Factura factura = new Factura(mesa.getPedido(), numeroFacturaActual);
+                    ImprimirFactura.imprimirFacturaCompleta(factura);
+                    numeroFacturaActual = numeroFacturaActual + 1;
                     System.out.println();
                 } else {
                     System.out.println("No se puede generar factura.");
@@ -95,10 +93,8 @@ public class RestauranteElBuenSabor {
                 }
             } else if (opcionMenu == 5) {
                 System.out.println();
-                Utilidades.reiniciar();
+                Utilidades.reiniciar(mesa);
                 intentosInvalidos = 0;
-                numeroMesa = 0;
-                montoProducto = 0;
                 System.out.println("Mesa reiniciada. Lista para nuevo cliente.");
                 System.out.println();
             } else if (opcionMenu == 0) {
