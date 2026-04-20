@@ -40,11 +40,11 @@ public class Factura {
     public double calcularSubtotalConDescuento() {
         return calcularSubtotal() - calcularDescuento();
     }
-
+// El IVA se calcula sobre el subtotal ya descontado, segun DIAN 2024
     public double calcularIVA() {
         return calcularSubtotalConDescuento() * Carta.TASA_IVA;
     }
-
+// La propina aplica sobre el total con IVA incluido, no sobre el subtotal
     public double calcularPropina() {
         if (calcularSubtotalConDescuento() > Carta.UMBRAL_PROPINA) {
             return calcularSubtotalConDescuento() * Carta.TASA_PROPINA;
